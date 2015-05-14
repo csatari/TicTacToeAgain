@@ -15,6 +15,11 @@
                 <MenuItem Header="Player vs CPU" IsChecked="{Binding PC}" Command="{Binding PlayerChangedCommand}" CommandParameter="PC"/>
                 <MenuItem Header="CPU vs CPU" IsChecked="{Binding CC}" Command="{Binding PlayerChangedCommand}" CommandParameter="CC"/>
             </MenuItem>
+            <MenuItem Header="Difficulty">
+                <MenuItem Header="Easy" IsChecked="{Binding Easy}" Command="{Binding DifficultyChangedCommand}" CommandParameter="Easy"/>
+                <MenuItem Header="Medium" IsChecked="{Binding Medium}" Command="{Binding DifficultyChangedCommand}" CommandParameter="Medium"/>
+                <MenuItem Header="Hard" IsChecked="{Binding Hard}" Command="{Binding DifficultyChangedCommand}" CommandParameter="Hard"/>
+            </MenuItem>
         </Menu>
         <ScrollViewer Grid.Row="1" x:Name="scrollbar" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
             <ItemsControl ItemsSource="{Binding Elements}">

@@ -16,6 +16,9 @@ namespace TicTacToe.ViewModel
         #region Properties
 
         private Logic _model;
+
+        private const int EASY_WRONG_STEP_AFTER_STEPS = 5;
+        private const int MEDIUM_WRONG_STEP_AFTER_STEPS = 10;
         
         private ObservableCollection<TicTacToeElement> _Elements;
         public ObservableCollection<TicTacToeElement> Elements
@@ -77,11 +80,46 @@ namespace TicTacToe.ViewModel
             }
         }
 
+        private bool _Easy;
+        public bool Easy
+        {
+            get { return _Easy; }
+            set
+            {
+                _Easy = value;
+                OnPropertyChanged("Easy");
+            }
+        }
+
+        private bool _Medium;
+        public bool Medium
+        {
+            get { return _Medium; }
+            set
+            {
+                _Medium = value;
+                OnPropertyChanged("Medium");
+            }
+        }
+
+        private bool _Hard;
+        public bool Hard
+        {
+            get { return _Hard; }
+            set
+            {
+                _Hard = value;
+                OnPropertyChanged("Hard");
+            }
+        }
+
         private bool nextIsCPU = false;
+
+        private int wrongStepHelper = 0;
 
         private List<Tuple<int, int, int>> fieldValues;
 
-        Random r = new Random(2312421);
+        Random r = new Random(Guid.NewGuid().GetHashCode());
         /// <summary>
         /// Ha hamis, akkor az első játékos jön (PP, PC, CC-ből az első), ha igaz, akkor a második (PP,PC,CC-ből a második)
         /// </summary>
@@ -92,6 +130,7 @@ namespace TicTacToe.ViewModel
         #region DelegateCommands
 
         public DelegateCommand PlayerChangedCommand { get; set; }
+        public DelegateCommand DifficultyChangedCommand { get; set; }
 
         #endregion
 
@@ -121,13 +160,15 @@ namespace TicTacToe.ViewModel
             PP = true;
             PC = false;
             CC = false;
+            Easy = true;
+            Hard = false;
             fieldValues = new List<Tuple<int, int, int>>();
             PlayerChangedCommand = new DelegateCommand(PlayerSettingsChanged);
+            DifficultyChangedCommand = new DelegateCommand(DifficultyChanged);
             Size = Logic.SIZE;
             CreateGameTable(Logic.SIZE);
             NewGame();
         }
-
 
         #endregion
 
@@ -156,6 +197,35 @@ namespace TicTacToe.ViewModel
                     PP = false;
                     PC = false;
                     CC = true;
+                    break;
+                default: break;
+            }
+            NewGame();
+        }
+
+        /// <summary>
+        /// Akkor hívódik meg, amikor megváltozik a nehézség.
+        /// </summary>
+        /// <param name="obj"></param>
+        private void DifficultyChanged(object obj)
+        {
+            String diff = (String)obj;
+            switch(diff)
+            {
+                case "Easy":
+                    Easy = true;
+                    Medium = false;
+                    Hard = false;
+                    break;
+                case "Medium":
+                    Easy = false;
+                    Medium = true;
+                    Hard = false;
+                    break;
+                case "Hard":
+                    Easy = false;
+                    Medium = false;
+                    Hard = true;
                     break;
                 default: break;
             }
@@ -297,18 +367,46 @@ namespace TicTacToe.ViewModel
         private void CPUStep()
         {
             //TODO itt kell hívni az AI-t
-            //_model.
-            //int random = r.Next(Elements.Where(x => x.IsEnabled == true).Count());
 
-            int max = fieldValues.First().Item3;
-            foreach (var field in fieldValues)
+            Tuple<int, int, int> chosenField;
+            bool bestStep = true;
+            if (!Hard)
             {
-                if(max < field.Item3) 
+                int maxStep;
+                if (Medium) maxStep = MEDIUM_WRONG_STEP_AFTER_STEPS;
+                else if (Easy) maxStep = EASY_WRONG_STEP_AFTER_STEPS;
+                else maxStep = 5;
+
+                if (wrongStepHelper < maxStep)
                 {
-                    max = field.Item3;
+                    wrongStepHelper++;
+                }
+                else
+                {
+                    bestStep = false;
+                    wrongStepHelper = 0;
                 }
             }
-            var chosenField = fieldValues.Where(x => x.Item3 == max).First();
+
+            if (bestStep)
+            {
+                int max = fieldValues.First().Item3;
+                foreach (var field in fieldValues)
+                {
+                    if (max < field.Item3)
+                    {
+                        max = field.Item3;
+                    }
+                }
+                chosenField = fieldValues.Where(x => x.Item3 == max).First();
+            }
+            else
+            {
+                int randomElement = r.Next(0, fieldValues.Count);
+                chosenField = fieldValues.ElementAt(randomElement);
+            }
+
+            
 
             NextStep(Elements.Where(x => x.X == chosenField.Item1 && x.Y == chosenField.Item2).First());
         }
