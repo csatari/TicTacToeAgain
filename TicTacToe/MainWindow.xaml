@@ -32,7 +32,7 @@
                                     <Style.Triggers>
                                         <!-- a szín egy adatkötés hatására fog változni -->
                                         <DataTrigger Binding="{Binding IsEnabled}" Value="True">
-                                            <Setter Property="Background" Value="Gray" />
+                                            <Setter Property="Background" Value="White" />
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding IsEnabled}" Value="False">
                                             <Setter Property="Background" Value="{Binding Color}" />

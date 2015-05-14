@@ -2,3 +2,8 @@ E:\ELTE\KOMPONENS\komponens-elte\TicTacToe\TicTacToeLibrary\bin\Release\TicTacTo
 E:\ELTE\KOMPONENS\komponens-elte\TicTacToe\TicTacToeLibrary\bin\Release\TicTacToeLibrary.pdb
 E:\ELTE\KOMPONENS\komponens-elte\TicTacToe\TicTacToeLibrary\obj\Release\TicTacToeLibrary.dll
 E:\ELTE\KOMPONENS\komponens-elte\TicTacToe\TicTacToeLibrary\obj\Release\TicTacToeLibrary.pdb
+E:\ELTE\KOMPONENS\TicTacToeAgain\TicTacToeLibrary\bin\Release\TicTacToeLibrary.dll
+E:\ELTE\KOMPONENS\TicTacToeAgain\TicTacToeLibrary\bin\Release\TicTacToeLibrary.pdb
+E:\ELTE\KOMPONENS\TicTacToeAgain\TicTacToeLibrary\obj\Release\TicTacToeLibrary.csprojResolveAssemblyReference.cache
+E:\ELTE\KOMPONENS\TicTacToeAgain\TicTacToeLibrary\obj\Release\TicTacToeLibrary.dll
+E:\ELTE\KOMPONENS\TicTacToeAgain\TicTacToeLibrary\obj\Release\TicTacToeLibrary.pdb

@@ -1,0 +1,7 @@
+/TicTacToe/bin/Debug
+/TicTacToe/obj/Debug
+/TicTacToeLibrary/bin/Debug
+/TicTacToeLibrary/obj/Debug
+*.user
+*.lref
+*.cache
