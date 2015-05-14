@@ -16,3 +16,6 @@ E:\ELTE\KOMPONENS\komponens-elte\TicTacToe\TicTacToe\obj\Release\TicTacToe.exe
 E:\ELTE\KOMPONENS\komponens-elte\TicTacToe\TicTacToe\obj\Release\TicTacToe.pdb
 E:\ELTE\KOMPONENS\komponens-elte\TicTacToe\TicTacToe\bin\Release\Interfaces.dll
 E:\ELTE\KOMPONENS\komponens-elte\TicTacToe\TicTacToe\bin\Release\Interfaces.pdb
+D:\ELTE\Software Information Technology MSc\Komponens alapú szoftverfejlesztés\TicTacToeAgain\TicTacToe\bin\Release\TicTacToe.exe.config
+D:\ELTE\Software Information Technology MSc\Komponens alapú szoftverfejlesztés\TicTacToeAgain\TicTacToe\obj\Release\TicTacToe.exe
+D:\ELTE\Software Information Technology MSc\Komponens alapú szoftverfejlesztés\TicTacToeAgain\TicTacToe\obj\Release\TicTacToe.pdb

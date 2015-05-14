@@ -177,6 +177,7 @@ namespace TicTacToe.ViewModel
                         Y = j, 
                         Id = idCounter,
                         IsEnabled = true,
+                        Color = "White",
                         StepCommand = new DelegateCommand(param => FieldChosen(Convert.ToInt32(param)))
                     });
                     idCounter++;
@@ -196,6 +197,7 @@ namespace TicTacToe.ViewModel
             {
                 element.Text = "";
                 element.IsEnabled = true;
+                element.Color = "White";
             }
             SetInfoFromActualState();
         }
@@ -222,10 +224,12 @@ namespace TicTacToe.ViewModel
             if (!Player)
             {
                 element.Text = "X";
+                element.Color = "Red";
             }
             else
             {
                 element.Text = "O";
+                element.Color = "Green";
             }
 
             ChangePlayer();
@@ -238,13 +242,13 @@ namespace TicTacToe.ViewModel
 
             #region Evaluations on screen for testing
 
-            /*foreach (TicTacToeElement _element in Elements)
+            foreach (TicTacToeElement _element in Elements)
             {
                 if (_model.CanPlace(_element.X, _element.Y))
                 {
-                    _element.Text = _model.ValueTableValue(_element.X, _element.Y);
+                    _element.Text = _model.ValueTableValue(_element.X, _element.Y) == "0" ? "" : _model.ValueTableValue(_element.X, _element.Y);
                 }
-            }*/
+            }
 
             #endregion
 

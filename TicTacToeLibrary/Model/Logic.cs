@@ -258,7 +258,7 @@ namespace TicTacToe.Model
             int newValue = eval.GetFieldValue(eval.Star(state, row, col, 2), 2) -
                             eval.GetFieldValue(eval.Star(state, row, col, 1), 1);
 
-            state.SetValueTableValue(row, col, newValue);
+            state.SetValueTableValue(row, col, Math.Abs(newValue));
 
             state.SetValue(state.GetValue() - (oldValue - newValue));
 
