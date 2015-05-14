@@ -79,6 +79,8 @@ namespace TicTacToe.ViewModel
 
         private bool nextIsCPU = false;
 
+        private List<Tuple<int, int, int>> fieldValues;
+
         Random r = new Random(2312421);
         /// <summary>
         /// Ha hamis, akkor az első játékos jön (PP, PC, CC-ből az első), ha igaz, akkor a második (PP,PC,CC-ből a második)
@@ -119,6 +121,7 @@ namespace TicTacToe.ViewModel
             PP = true;
             PC = false;
             CC = false;
+            fieldValues = new List<Tuple<int, int, int>>();
             PlayerChangedCommand = new DelegateCommand(PlayerSettingsChanged);
             Size = Logic.SIZE;
             CreateGameTable(Logic.SIZE);
@@ -242,11 +245,20 @@ namespace TicTacToe.ViewModel
 
             #region Evaluations on screen for testing
 
+            fieldValues.Clear();
             foreach (TicTacToeElement _element in Elements)
             {
                 if (_model.CanPlace(_element.X, _element.Y))
                 {
-                    _element.Text = _model.ValueTableValue(_element.X, _element.Y) == "0" ? "" : _model.ValueTableValue(_element.X, _element.Y);
+                    if (_model.ValueTableValue(_element.X, _element.Y) == "0")
+                    {
+                        _element.Text = "";
+                    }
+                    else
+                    {
+                        _element.Text = _model.ValueTableValue(_element.X, _element.Y);
+                        fieldValues.Add(new Tuple<int, int, int>(_element.X, _element.Y, int.Parse(_element.Text)));
+                    }
                 }
             }
 
@@ -285,9 +297,20 @@ namespace TicTacToe.ViewModel
         private void CPUStep()
         {
             //TODO itt kell hívni az AI-t
-            int random = r.Next(Elements.Where(x => x.IsEnabled == true).Count());
+            //_model.
+            //int random = r.Next(Elements.Where(x => x.IsEnabled == true).Count());
 
-            NextStep(Elements.Where(x => x.IsEnabled == true).ElementAt(random));
+            int max = fieldValues.First().Item3;
+            foreach (var field in fieldValues)
+            {
+                if(max < field.Item3) 
+                {
+                    max = field.Item3;
+                }
+            }
+            var chosenField = fieldValues.Where(x => x.Item3 == max).First();
+
+            NextStep(Elements.Where(x => x.X == chosenField.Item1 && x.Y == chosenField.Item2).First());
         }
 
         /// <summary>
